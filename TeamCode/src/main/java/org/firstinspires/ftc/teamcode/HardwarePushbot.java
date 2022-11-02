@@ -44,18 +44,15 @@ public class HardwarePushbot
     public DcMotor  leftBack = null;
     public DcMotor  rightBack = null;
 
-    /* local OpMode members. */
+
     HardwareMap hwMap           =  null;
     private ElapsedTime period  = new ElapsedTime();
 
-    /* Constructor */
-
-    /* Initialize standard Hardware interfaces */
     public void init(HardwareMap ahwMap) {
-        // Save reference to Hardware map
+
         hwMap = ahwMap;
 
-        // Define and Initialize Motors
+
         leftFront  = hwMap.get(DcMotor.class, "LF");
         leftBack  = hwMap.get(DcMotor.class, "LB");
         rightFront  = hwMap.get(DcMotor.class, "RF");
@@ -67,24 +64,17 @@ public class HardwarePushbot
         rightBack.setDirection(DcMotor.Direction.FORWARD);
         leftBack.setDirection(DcMotor.Direction.REVERSE);
 
-        // Set all motors to zero power'
+
         setMotorPowers(0);
 
-        // Set all motors to run without encoders.
-        // May want to use RUN_USING_ENCODERS if encoders are installed.
+
         leftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         leftBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
-    /**
-     * Sets all motor powers to given speeds.
-     * @param LFPower
-     * @param RFPower
-     * @param LBPower
-     * @param RBPower
-     */
+
     public void setMotorPowers(double LFPower, double RFPower, double LBPower, double RBPower) {
         leftFront.setPower(LFPower);
         rightFront.setPower(RFPower);
@@ -109,7 +99,3 @@ public class HardwarePushbot
         }
         setMotorPowers(0);
     }
-    public void autoMove(double allPower, ElapsedTime runtime, double time, LinearOpMode opMode, Telemetry telemetry){
-        autoMove(allPower, allPower, allPower, allPower, runtime, time, opMode);
-    }
-}
